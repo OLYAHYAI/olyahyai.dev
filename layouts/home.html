@@ -1,0 +1,28 @@
+{{ define "main" }}
+<header class="hero">
+  <img class="avatar" src="/cv/photo.jpg" alt="" width="96" height="96">
+  <div>
+    <h1>{{ site.Params.author }}</h1>
+    <p class="role">{{ .Params.role }}</p>
+  </div>
+</header>
+<section class="intro">{{ .Content }}</section>
+<nav class="links">
+  <a href="{{ "cv/" | relLangURL }}">{{ i18n "cv" }}</a>
+  <a href="/cv/{{ .Language.Lang }}.pdf">{{ i18n "cv_pdf" }}</a>
+  <a href="{{ site.Params.github }}" rel="me">GitHub</a>
+  <a href="{{ site.Params.linkedin }}" rel="me">LinkedIn</a>
+</nav>
+<section>
+  <h2>{{ i18n "projects" }}</h2>
+  <ul class="projects">
+  {{- range .Params.projects }}
+    <li><strong>{{ .name }}</strong> <span class="when">{{ .when }}</span><br>{{ .text }}</li>
+  {{- end }}
+  </ul>
+</section>
+<section>
+  <h2>{{ i18n "contact" }}</h2>
+  <p><a href="mailto:{{ site.Params.email }}">{{ site.Params.email }}</a></p>
+</section>
+{{ end }}

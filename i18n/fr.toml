@@ -1,0 +1,10 @@
+[cv]
+other = "CV"
+[cv_pdf]
+other = "CV (PDF)"
+[projects]
+other = "Réalisations"
+[contact]
+other = "Contact"
+[switch]
+other = "English version"

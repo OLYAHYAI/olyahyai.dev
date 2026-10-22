@@ -1,0 +1,30 @@
+baseURL = "https://olyahyai.dev/"
+title = "Omar Lyahyai"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term", "RSS"]
+
+[languages]
+  [languages.en]
+    languageName = "English"
+    weight = 1
+    [languages.en.params]
+      description = "Systems, network & security engineer — self-hosted SOC/SOAR, detection engineering, homelab."
+  [languages.fr]
+    languageName = "Français"
+    weight = 2
+    [languages.fr.params]
+      description = "Ingénieur systèmes, réseaux et sécurité — SOC/SOAR auto-hébergé, ingénierie de détection, homelab."
+
+[params]
+  author = "Omar Lyahyai"
+  github = "https://github.com/OLYAHYAI"
+  linkedin = "https://www.linkedin.com/in/lyahyai-omar"
+  email = "omar_lyahyai@hotmail.fr"
+
+[markup.goldmark.renderer]
+  unsafe = false
+
+[minify]
+  minifyOutput = true

@@ -1,0 +1,10 @@
+[cv]
+other = "Résumé"
+[cv_pdf]
+other = "Résumé (PDF)"
+[projects]
+other = "Selected work"
+[contact]
+other = "Contact"
+[switch]
+other = "Version française"

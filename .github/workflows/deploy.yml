@@ -1,0 +1,82 @@
+# Build the site (Hugo) + the CV PDFs (headless Chrome) and deploy to Cloudflare Pages.
+# - push on main      -> production (olyahyai.dev)
+# - push on any other branch -> preview URL <branch>.<project>.pages.dev
+# GitHub is a push-mirror of Forgejo: branches/PRs are reviewed on Forgejo, GitHub only builds.
+name: build-and-deploy
+
+on:
+  push:
+    branches: ["**"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  HUGO_VERSION: "0.168.0"
+  # sha256 of hugo_extended_${HUGO_VERSION}_linux-amd64.deb (from the release checksums.txt)
+  HUGO_SHA256: "b7cd5087c39bf5584e40180bd04fab0c6fb19f2913cd63121da8663e112a08db"
+  CF_PROJECT: "olyahyai-dev"
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # full history for the secret scan
+
+      - name: Secret scan (gitleaks)
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install Hugo (pinned + checksum)
+        run: |
+          deb="hugo_extended_${HUGO_VERSION}_linux-amd64.deb"
+          curl -fsSLO "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${deb}"
+          echo "${HUGO_SHA256}  ${deb}" | sha256sum -c -
+          sudo dpkg -i "${deb}"
+          hugo version
+
+      - name: Build site
+        run: hugo --gc --minify
+
+      - name: Build CV PDFs
+        run: scripts/build-pdf.sh "$(command -v google-chrome)"
+
+      - name: Check output
+        run: |
+          for f in public/index.html public/fr/index.html public/cv/index.html public/fr/cv/index.html public/cv/en.pdf public/cv/fr.pdf; do
+            test -s "$f" || { echo "missing $f"; exit 1; }
+          done
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: public
+          retention-days: 7
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    environment:
+      name: ${{ github.ref_name == 'main' && 'production' || 'preview' }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: public
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy public --project-name=${{ env.CF_PROJECT }} --branch=${{ github.ref_name }} --commit-dirty=true

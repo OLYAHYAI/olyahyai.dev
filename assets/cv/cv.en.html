@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>CV - Omar LYAHYAI - Systems, Network &amp; Security Engineer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  :root {
+    --ink: #111827; --ink-2: #374151; --muted: #6b7280; --line: #d1d5db;
+    --accent: #0284c7; --accent-2: #0ea5e9; --side: #f3f4f6;
+  }
+  html, body { margin: 0; padding: 0; background: #e5e7eb; }
+  body {
+    font-family: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+    color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .page {
+    width: 210mm; height: 297mm; margin: 10mm auto; background: #fff;
+    display: flex; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,.15);
+    page-break-after: always; break-after: page;
+  }
+  .page:last-child { page-break-after: auto; break-after: auto; }
+  .left { width: 62mm; flex: 0 0 62mm; background: var(--side); padding: 14mm 7mm 10mm 9mm; }
+  .right { flex: 1; padding: 13mm 12mm 10mm 10mm; }
+
+  .photo { width: 40mm; height: 40mm; border-radius: 50%; padding: 3px; margin: 0 auto 5mm;
+           background: linear-gradient(135deg, var(--accent-2), #22c55e, #6366f1); }
+  .photo img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; }
+  .name { text-align: center; font-size: 19px; font-weight: 700; letter-spacing: .14em;
+          text-transform: uppercase; line-height: 1.25; color: #1f2937; }
+  .role { text-align: center; font-size: 8.6px; font-weight: 600; letter-spacing: .13em;
+          text-transform: uppercase; color: var(--accent); margin: 3mm 0 2mm; line-height: 1.55; }
+
+  .side-title { font-size: 8.6px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+                color: #4b5563; border-top: 1px solid #9ca3af; padding-top: 2.4mm; margin: 6mm 0 2.4mm; }
+  .side { font-size: 8.9px; line-height: 1.55; color: var(--ink-2); }
+  .c-label { display: block; font-size: 7px; font-weight: 600; letter-spacing: .16em;
+             text-transform: uppercase; color: var(--muted); margin-top: 1.8mm; }
+  .c-value { display: block; font-size: 8.6px; color: var(--ink); word-break: break-word; }
+  a { color: var(--accent); text-decoration: none; }
+
+  .pills span { display: inline-block; font-size: 7.8px; line-height: 1.2; padding: 1.6px 6px;
+                border: 1px solid var(--line); border-radius: 999px; background: #fff;
+                margin: 0 2.5px 3px 0; color: var(--ink); }
+  .side .pills span { background: #fff; }
+
+  .section { margin-bottom: 5.4mm; }
+  h2 { font-size: 10px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
+       color: #374151; border-bottom: 1px solid var(--line); padding-bottom: 1.6mm; margin: 0 0 2.6mm; }
+  p { font-size: 9.5px; line-height: 1.6; margin: 0 0 1.8mm; color: var(--ink); }
+
+  .skills { display: grid; grid-template-columns: 1fr 1fr; gap: 2.4mm 6mm; }
+  .skills h3 { font-size: 8.8px; font-weight: 700; margin: 0 0 1.2mm; color: var(--ink); }
+
+  .item { margin-bottom: 3.6mm; break-inside: avoid; }
+  .item-head { display: flex; justify-content: space-between; align-items: baseline; gap: 4mm; }
+  .item-title { font-size: 9.8px; font-weight: 700; color: var(--ink); }
+  .item-meta { font-size: 8.2px; color: var(--muted); white-space: nowrap; text-align: right; }
+  .item-sub { font-size: 8.3px; color: var(--accent); font-weight: 600; margin: .4mm 0 1mm; }
+  ul { margin: 0; padding-left: 3.6mm; }
+  li { font-size: 9.1px; line-height: 1.5; color: var(--ink-2); margin-bottom: .55mm; }
+  li b { color: var(--ink); font-weight: 600; }
+  .stack { font-size: 8px; color: var(--muted); margin-top: .8mm; }
+
+  .edu .item-title { font-size: 9px; }
+
+  @media print {
+    html, body { background: #fff; }
+    .page { margin: 0; box-shadow: none; }
+  }
+  @media screen and (max-width: 820px) {
+    .page { width: 100%; height: auto; margin: 0; flex-direction: column; }
+    .left { width: 100%; flex: none; }
+    .skills { grid-template-columns: 1fr; }
+  }
+  .cv-bar { max-width: 210mm; margin: 6mm auto 0; display: flex; gap: 6mm; font-size: 13px; }
+  @media print { .cv-bar { display: none; } }
+</style>
+</head>
+<body>
+<nav class="cv-bar"><a href="/">← olyahyai.dev</a><a href="/cv/en.pdf">Download PDF</a><a href="/fr/cv/" hreflang="fr">Version française</a></nav>
+
+<!-- ============ PAGE 1 ============ -->
+<div class="page">
+  <aside class="left">
+    <div class="photo"><img src="/cv/photo.jpg" alt="Omar LYAHYAI" /></div>
+    <div class="name">Omar<br />Lyahyai</div>
+    <div class="role">Systems, Network<br />&amp; Security Engineer<br />Master 2 Cyber-Defense</div>
+
+    <div class="side-title">Contact</div>
+    <div class="side">
+      <span class="c-label">Location</span><span class="c-value">Tangier-Assilah, Morocco</span>
+      <span class="c-label">Phone</span><span class="c-value">+212 6 56 59 95 81</span>
+      <span class="c-label">E-mail</span><span class="c-value">omar_lyahyai@hotmail.fr</span>
+      <span class="c-label">LinkedIn</span><span class="c-value"><a href="https://www.linkedin.com/in/lyahyai-omar">linkedin.com/in/lyahyai-omar</a></span>
+      <span class="c-label">GitHub</span><span class="c-value"><a href="https://github.com/OLYAHYAI">github.com/OLYAHYAI</a></span>
+      <span class="c-label">Portfolio</span><span class="c-value"><a href="https://olyahyai.dev">olyahyai.dev</a></span>
+          </div>
+
+    <div class="side-title">Profile</div>
+    <div class="side">
+      7+ years running production infrastructure (systems, networks,
+      virtualization, scheduling, backups) in high-availability environments.
+      I build complete systems end to end: a self-hosted SOC/SOAR platform, a SaaS
+      e-commerce product and a 3-node Proxmox homelab. I am comfortable across
+      operations, security, automation and DevOps, and I document what I build.
+    </div>
+
+    <div class="side-title">Soft skills</div>
+    <div class="side pills">
+      <span>Root-cause analysis</span><span>Autonomy</span><span>Documentation</span>
+      <span>Teamwork</span><span>Communication</span><span>Stress management</span>
+      <span>Adaptability</span><span>Proactivity</span>
+    </div>
+
+    <div class="side-title">Languages</div>
+    <div class="side">
+      <b>French</b> — Bilingual<br />
+      <b>English</b> — Professional<br />
+      <b>Spanish</b> — Intermediate
+    </div>
+  </aside>
+
+  <main class="right">
+    <section class="section">
+      <h2>Profile &amp; objective</h2>
+      <p>Systems and network administrator with 7+ years in heterogeneous production environments
+        (Windows, Linux, AS400, VMware/Hyper-V), N2/N3 incident handling, job scheduling and
+        automation. Alongside this role, I designed and run a self-hosted mini-SOC/SOAR, which is my
+        Master's final-year project. It uses Wazuh SIEM, Suricata IDS, n8n automation, AI-assisted
+        triage and Velociraptor DFIR on a 3-node Proxmox cluster.</p>
+      <p>Currently completing a Master 2 in Cyber-Defense (French-Moroccan double degree), I am open to
+        IT roles across infrastructure, cloud/DevOps and cybersecurity (SOC, detection engineering,
+        secure architecture), where I can bring both an operations mindset and hands-on security engineering.</p>
+    </section>
+
+    <section class="section">
+      <h2>Technical skills</h2>
+      <div class="skills">
+        <div>
+          <h3>Security Operations &amp; Detection</h3>
+          <div class="pills"><span>Wazuh SIEM / XDR</span><span>OpenSearch</span><span>Suricata IDS</span><span>CrowdSec</span><span>Velociraptor (DFIR)</span><span>Sysmon</span><span>MITRE ATT&amp;CK</span><span>Atomic Red Team</span><span>Kali Linux</span><span>Custom decoders &amp; rules</span></div>
+        </div>
+        <div>
+          <h3>Network &amp; Perimeter</h3>
+          <div class="pills"><span>pfSense</span><span>FortiGate IPsec VPN</span><span>Cisco switching/routing</span><span>VLANs &amp; segmentation</span><span>TLS / PKI</span><span>Tailscale</span><span>Cloudflare WAF &amp; Tunnels</span><span>pfBlockerNG</span><span>LAN/WAN</span></div>
+        </div>
+        <div>
+          <h3>Systems &amp; Virtualization</h3>
+          <div class="pills"><span>Linux (Debian)</span><span>Windows Server / AD</span><span>IBM OS/400</span><span>Proxmox VE (3-node cluster)</span><span>VMware</span><span>Hyper-V</span><span>LXC</span><span>Veeam</span><span>MIMIX</span></div>
+        </div>
+        <div>
+          <h3>Automation, DevOps &amp; AI</h3>
+          <div class="pills"><span>Python</span><span>Bash</span><span>PowerShell</span><span>n8n</span><span>SMA OpCon</span><span>Git / GitHub Actions</span><span>Docker</span><span>Kubernetes (basics)</span><span>MCP servers</span><span>LLM agents</span></div>
+        </div>
+        <div>
+          <h3>Monitoring &amp; Observability</h3>
+          <div class="pills"><span>Zabbix</span><span>SCOM</span><span>Datadog</span><span>Sentry</span></div>
+        </div>
+        <div>
+          <h3>Development &amp; Data</h3>
+          <div class="pills"><span>Next.js / Vercel</span><span>Strapi CMS</span><span>PostgreSQL</span><span>Kotlin (Android)</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Professional experience</h2>
+
+      <div class="item">
+        <div class="item-head"><div class="item-title">System and Network Administrator — VILAVI Group</div><div class="item-meta">Tangier | Apr. 2019 – Present</div></div>
+        <ul>
+          <li>Run production infrastructure and cross-functional projects with internal teams and external providers, under strict availability and security constraints.</li>
+          <li>Administer the <b>SMA OpCon</b> scheduler to automate and centralize recurring jobs across Windows, Linux, AS400, Informatica, EDI and ODI, and industrialize production reports.</li>
+          <li>Deploy workflows, jobs and batches (Informatica, ODI) to production, and support development, data and business teams during POCs and rollouts.</li>
+          <li>Handle <b>N2/N3 production incidents</b>, follow the production plan and help plan critical operations.</li>
+          <li>Administer Windows, Windows Server and Unix systems and VMware/Hyper-V virtualization, and run backup and restore operations (Veeam, MIMIX).</li>
+          <li>Track network and telecom incidents, escalate to carriers, and administer site-to-site <b>IPsec VPN tunnels on FortiGate</b> and the Cisco network.</li>
+          <li>Write and maintain operational documentation (DAT, DEX, DIN, PMEP, MODOP) and improve procedures.</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="item-head"><div class="item-title">Network and System Technician — KONTACTEL</div><div class="item-meta">Tangier | Sept. 2018 – Dec. 2018</div></div>
+        <ul>
+          <li>Managed 200+ workstations in a contact center, and installed physical and virtual servers for telephony and CRM.</li>
+          <li>Administered Asterisk (500+ calls per day) and integrated call-center CRMs (VOX CRM, Goautodial, PhingooCRM).</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="item-head"><div class="item-title">Network and Infrastructure Technician — STM</div><div class="item-meta">Tangier | Aug. 2017 – Sept. 2017</div></div>
+        <ul>
+          <li>Designed and deployed fiber and copper cabling, worked on WAN links, and diagnosed network faults.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ============ PAGE 2 ============ -->
+<div class="page">
+  <aside class="left">
+    <div class="side-title" style="margin-top:0">Key figures</div>
+    <div class="side">
+      <span class="c-label">SOC data sources</span><span class="c-value">pfSense, Suricata, CrowdSec, DHCP, DNS, endpoints</span>
+      <span class="c-label">Detection regression suite</span><span class="c-value">20 / 20 test cases passing</span>
+      <span class="c-label">DFIR coverage</span><span class="c-value">Velociraptor on 9 endpoints</span>
+      <span class="c-label">Atomic Red Team</span><span class="c-value">345 techniques staged on the AD lab</span>
+      <span class="c-label">Infrastructure</span><span class="c-value">3-node Proxmox cluster, VMs and LXC</span>
+    </div>
+
+    <div class="side-title">Certifications</div>
+    <div class="side">
+      Google Cybersecurity Certificate (2025)<br />
+      Cisco Certified Network Associate (CCNA)<br />
+      Fortinet NSE 1 &amp; NSE 2
+    </div>
+
+    <div class="side-title">Interests</div>
+    <div class="side pills">
+      <span>Cybersecurity</span><span>Homelab</span><span>Automation</span><span>AI for security</span><span>Jiu-Jitsu</span><span>DIY</span>
+    </div>
+  </aside>
+
+  <main class="right">
+    <section class="section">
+      <h2>Projects &amp; achievements</h2>
+
+      <div class="item">
+        <div class="item-head"><div class="item-title">Autonomous Mini-SOC / SOAR — Master's final-year project</div><div class="item-meta">2026 – Present</div></div>
+        <div class="item-sub">Self-hosted on Proxmox · no public exposure (Tailscale-only access)</div>
+        <ul>
+          <li><b>SIEM:</b> deployed Wazuh (manager and indexer) to centralize pfSense firewall logs, Suricata IDS (EVE JSON), CrowdSec, DHCP and Unbound DNS, plus about a dozen Linux, Windows and Android agents. Encrypted the syslog transport with <b>TLS</b> (stunnel, internal PKI).</li>
+          <li><b>Detection engineering:</b> wrote custom decoders and rules mapped to <b>MITRE ATT&amp;CK</b>, added GeoIP enrichment and built a threat-geolocation dashboard. Fixed silent ingestion failures at the root cause (decoder anchoring, chrooted daemons, a syslog boot race after a pfSense upgrade).</li>
+          <li><b>Detection-as-code:</b> put the ruleset under Git with a written change procedure and a <b>non-regression suite that replays real logs</b> (20/20 passing). Added a pipeline health watchdog that alerts on drops in volume, parsing or freshness.</li>
+          <li><b>SOAR (n8n):</b> Wazuh webhooks feed AbuseIPDB enrichment, multi-rule correlation, deduplication, enriched Telegram alerts and a daily digest. Designed and validated <b>automatic IP blocking</b> on pfSense through Wazuh Active Response (least-privilege SSH account, pf table).</li>
+          <li><b>AI-assisted triage:</b> each critical alert opens a ticket that an LLM agent triages through <b>home-built read-only MCP servers</b> (Wazuh, Proxmox). The agents are controlled from a Matrix/Element X SOC room. Agent privileges were hardened after an observed tool-bypass attempt.</li>
+          <li><b>DFIR:</b> deployed Velociraptor on 9 endpoints and forwarded its audit log to Wazuh, with rules for remote execution and agent tampering.</li>
+          <li><b>Purple-team lab</b> on an isolated network: Windows AD domain controller (Kerberos and DCSync auditing, Sysmon-modular, Atomic Red Team), DVWA and Metasploitable 3.</li>
+        </ul>
+        <div class="stack">Wazuh · OpenSearch · Suricata · CrowdSec · pfSense · n8n · Python · MCP · Velociraptor · Sysmon · Git</div>
+      </div>
+
+      <div class="item">
+        <div class="item-head"><div class="item-title">PurpleOps — Android SOC &amp; assessment app</div><div class="item-meta">2026</div></div>
+        <ul>
+          <li>Native Kotlin app on a rooted Pixel (LineageOS, KernelSU) that runs a Kali chroot and shows a <b>live Wazuh dashboard</b> (agents, alerts, posture score) over Tailscale.</li>
+          <li><b>GitHub Actions CI</b> builds and publishes signed releases, and the app updates itself silently. Tool installs on the phone are traced in Wazuh. Public repository: <a href="https://github.com/OLYAHYAI/PurpleOps">github.com/OLYAHYAI/PurpleOps</a>.</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="item-head"><div class="item-title">JBR.ma — E-commerce SaaS platform</div><div class="item-meta">2025 – 2026</div></div>
+        <ul>
+          <li>Designed and built a Moroccan SaaS that lets artisans and merchants open an online store without technical skills. An Android app was published on Google Play.</li>
+          <li>The containerized backend ran in LXC on Proxmox. The frontend is on Vercel with a <b>CI/CD pipeline</b> (GitHub, auto-deploy, one-click rollback). Traffic went through Cloudflare Tunnels, with strict multi-tenant isolation and a dedicated firewall. Datadog and Sentry monitored the platform.</li>
+        </ul>
+        <div class="stack">Next.js · Strapi v5 · PostgreSQL · n8n · Docker · Cloudflare · Datadog · Sentry</div>
+      </div>
+
+      <div class="item">
+        <div class="item-head"><div class="item-title">Homelab infrastructure — 3-node Proxmox cluster</div><div class="item-meta">Ongoing</div></div>
+        <ul>
+          <li>The pfSense perimeter runs Suricata, CrowdSec and pfBlockerNG, with VLAN segmentation and an isolated lab bridge. Remote access goes only through Tailscale.</li>
+          <li>Hosted services include Active Directory, PostgreSQL, Docker and n8n, plus a Matrix server and the AI agent platform on a dedicated VM. Workloads are isolated in resource pools.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section edu">
+      <h2>Education</h2>
+      <div class="item">
+        <div class="item-head"><div class="item-title">Master in Networks &amp; Telecommunications — Cyber-Defense, IS Security</div><div class="item-meta">Sept. 2025 – June 2027</div></div>
+        <div class="item-sub" style="color:var(--muted);font-weight:500">French-Moroccan double degree: UPHF / INSA Hauts-de-France &amp; ENSI</div>
+      </div>
+      <div class="item">
+        <div class="item-head"><div class="item-title">Professional Degree — Enterprise Network Security and Administration</div><div class="item-meta">2015 – 2018</div></div>
+        <div class="item-sub" style="color:var(--muted);font-weight:500">SUPTEM – BMHS / University of Saint-Quentin-en-Yvelines</div>
+      </div>
+      <div class="item">
+        <div class="item-head"><div class="item-title">High School Diploma</div><div class="item-meta">2014 – 2015</div></div>
+        <div class="item-sub" style="color:var(--muted);font-weight:500">Lycée Al Hadifa – Tangier</div>
+      </div>
+    </section>
+  </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="{{ .Language.Lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ site.Language.Params.description }}">
+  {{- range .AllTranslations }}
+  <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}">
+  {{- end }}
+  {{- with resources.Get "css/main.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
+  {{- end }}
+</head>
+<body>
+  <main class="wrap">{{ block "main" . }}{{ end }}</main>
+  <footer class="wrap foot">
+    {{- range .Translations }}<a href="{{ .RelPermalink }}" hreflang="{{ .Language.Lang }}">{{ i18n "switch" }}</a>{{ end }}
+    <span>© {{ now.Year }} {{ site.Params.author }}</span>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{{- /* Standalone page: the hand-written CV (assets/cv/cv.<lang>.html) is served as is.
+       No baseof on purpose: the CV carries its own print stylesheet for the PDF. */ -}}
+{{- with resources.Get (printf "cv/cv.%s.html" .Language.Lang) -}}
+{{ .Content | safeHTML }}
+{{- else -}}
+{{ errorf "missing assets/cv/cv.%s.html" $.Language.Lang }}
+{{- end -}}
