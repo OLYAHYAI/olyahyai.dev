@@ -30,7 +30,8 @@ static/cv/photo.jpg    profile photo shared by the CV and the home page
 static/_headers        Cloudflare Pages security headers (CSP, HSTS, ...)
 scripts/build-pdf.sh   prints /cv/ and /fr/cv/ to public/cv/{en,fr}.pdf
 tools/import-cv.py     P0 only: imports the hand-written CV (will be replaced by data/cv.yaml in P3)
-.github/workflows/     gitleaks → Hugo (pinned, checksum) → PDFs → Cloudflare Pages
+.github/workflows/     gitleaks (pinned binary, full history) → Hugo (pinned, checksum) → PDFs → Cloudflare Pages
+                       (the Pages project is created on the first run if it does not exist)
 ```
 
 ## Local build
@@ -56,5 +57,5 @@ None in this repository. The CI needs two GitHub Actions secrets:
 
 | Secret | Scope |
 |---|---|
-| `CLOUDFLARE_API_TOKEN` | Account → Cloudflare Pages → Edit, on this account only |
+| `CLOUDFLARE_API_TOKEN` | Account API token, Cloudflare Pages → Edit only, 1-year expiry |
 | `CLOUDFLARE_ACCOUNT_ID` | not secret strictly speaking, kept with the token |
