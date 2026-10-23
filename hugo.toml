@@ -7,7 +7,7 @@ disableKinds = ["taxonomy", "term", "RSS"]
 
 [languages]
   [languages.en]
-    languageName = "English"
+    label = "English"
     weight = 1
     [languages.en.permalinks.page]
       case-studies = "/case-studies/:slug/"
@@ -16,7 +16,7 @@ disableKinds = ["taxonomy", "term", "RSS"]
     [languages.en.params]
       description = "Systems, network & security engineer — self-hosted SOC/SOAR, detection engineering, homelab."
   [languages.fr]
-    languageName = "Français"
+    label = "Français"
     weight = 2
     [languages.fr.permalinks.page]
       case-studies = "/etudes-de-cas/:slug/"

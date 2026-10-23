@@ -1,6 +1,6 @@
 {{ define "main" }}
-<nav class="crumbs"><a href="{{ "/" | relLangURL }}">{{ i18n "home" }}</a></nav>
-<h1>{{ .Title }}</h1>
+<nav class="crumbs"><a href="{{ "/" | relLangURL }}">~</a> / {{ i18n "case_studies" }}</nav>
+<h1 class="page-title">{{ .Title }}</h1>
 <p class="lede">{{ i18n "case_studies_intro" }}</p>
 {{ partial "case-list.html" .Pages.ByWeight }}
 {{ end }}

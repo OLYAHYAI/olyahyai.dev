@@ -1,0 +1,12 @@
+{{- $cs := site.GetPage "/case-studies" -}}
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="{{ "/" | relLangURL }}">&gt;_ <b>OLYAHYAI</b></a>
+    <nav class="nav" aria-label="main">
+      {{- with $cs }}<a href="{{ .RelPermalink }}"{{ if or (eq $.RelPermalink .RelPermalink) (eq $.Section "case-studies") }} aria-current="page"{{ end }}>{{ i18n "case_studies" }}</a>{{ end }}
+      <a href="{{ "cv/" | relLangURL }}">{{ i18n "cv" }}</a>
+      <a class="hide-sm" href="{{ site.Params.github }}" rel="me">GitHub</a>
+      {{- range .Translations }}<a class="lang" href="{{ .RelPermalink }}" hreflang="{{ .Language.Lang }}" title="{{ i18n "switch" }}">{{ upper .Language.Lang }}</a>{{ end }}
+    </nav>
+  </div>
+</header>

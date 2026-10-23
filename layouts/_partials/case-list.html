@@ -1,10 +1,11 @@
 <ul class="cards">
-{{- range . }}
+{{- range $i, $p := . }}
   <li class="card">
-    <a href="{{ .RelPermalink }}">
-      <h3>{{ .Title }}</h3>
-      <p>{{ .Summary }}</p>
-      {{- with .Params.tags }}<p class="tags">{{ range . }}<span>{{ . }}</span>{{ end }}</p>{{ end }}
+    <a href="{{ $p.RelPermalink }}">
+      <span class="num">{{ printf "%02d" (add $i 1) }}</span>
+      <h3>{{ $p.Title }}</h3>
+      <p>{{ $p.Summary }}</p>
+      {{- with $p.Params.tags }}<p class="tags">{{ range . }}<span>{{ . }}</span>{{ end }}</p>{{ end }}
     </a>
   </li>
 {{- end }}
