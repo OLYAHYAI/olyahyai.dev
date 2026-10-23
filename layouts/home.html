@@ -1,34 +1,36 @@
 {{ define "main" }}
 <header class="hero">
-  <img class="avatar" src="/cv/photo.jpg" alt="" width="96" height="96">
+  <img class="avatar" src="/cv/photo.jpg" alt="" width="112" height="112">
   <div>
+    <p class="prompt">$ whoami</p>
     <h1>{{ site.Params.author }}</h1>
     <p class="role">{{ .Params.role }}</p>
   </div>
 </header>
-<section class="intro">{{ .Content }}</section>
-<nav class="links">
-  <a href="{{ "cv/" | relLangURL }}">{{ i18n "cv" }}</a>
-  <a href="/cv/{{ .Language.Lang }}.pdf">{{ i18n "cv_pdf" }}</a>
-  <a href="{{ site.Params.github }}" rel="me">GitHub</a>
-  <a href="{{ site.Params.linkedin }}" rel="me">LinkedIn</a>
+<div class="intro">{{ .Content }}</div>
+<nav class="actions">
+  {{- with site.GetPage "/case-studies" }}<a class="btn btn-primary" href="{{ .RelPermalink }}">{{ i18n "case_studies" }}</a>{{ end }}
+  <a class="btn btn-ghost" href="{{ "cv/" | relLangURL }}">{{ i18n "cv" }}</a>
+  <a class="btn btn-ghost" href="/cv/{{ .Language.Lang }}.pdf">{{ i18n "cv_pdf" }}</a>
+  <a class="btn btn-ghost" href="{{ site.Params.linkedin }}" rel="me">LinkedIn</a>
 </nav>
 {{- with site.GetPage "/case-studies" }}
-<section>
-  <h2><a class="h2link" href="{{ .RelPermalink }}">{{ i18n "case_studies" }}</a></h2>
+<section class="section">
+  <h2 class="section-title"><a href="{{ .RelPermalink }}">{{ i18n "case_studies" }}</a></h2>
+  <p class="section-sub">{{ i18n "case_studies_intro" }}</p>
   {{ partial "case-list.html" .Pages.ByWeight }}
 </section>
 {{- end }}
-<section>
-  <h2>{{ i18n "other_work" }}</h2>
+<section class="section">
+  <h2 class="section-title">{{ i18n "other_work" }}</h2>
   <ul class="projects">
   {{- range .Params.projects }}
-    <li><strong>{{ if .url }}<a href="{{ .url }}">{{ .name }}</a>{{ else }}{{ .name }}{{ end }}</strong> <span class="when">{{ .when }}</span><br>{{ .text }}</li>
+    <li><strong>{{ if .url }}<a href="{{ .url }}">{{ .name }}</a>{{ else }}{{ .name }}{{ end }}</strong><span class="when">{{ .when }}</span><br>{{ .text }}</li>
   {{- end }}
   </ul>
 </section>
-<section>
-  <h2>{{ i18n "contact" }}</h2>
-  <p><a href="mailto:{{ site.Params.email }}">{{ site.Params.email }}</a></p>
+<section class="section">
+  <h2 class="section-title">{{ i18n "contact" }}</h2>
+  <p class="contact"><a href="mailto:{{ site.Params.email }}">{{ site.Params.email }}</a></p>
 </section>
 {{ end }}

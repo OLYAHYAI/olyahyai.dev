@@ -4,19 +4,23 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
-  <meta name="description" content="{{ site.Language.Params.description }}">
+  <meta name="description" content="{{ with .Params.summary }}{{ . }}{{ else }}{{ site.Language.Params.description }}{{ end }}">
+  <meta name="theme-color" content="#0a0e27" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f5f6fa" media="(prefers-color-scheme: light)">
   {{- range .AllTranslations }}
   <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}">
   {{- end }}
+  <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
   {{- with resources.Get "css/main.css" | minify | fingerprint }}
   <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
   {{- end }}
 </head>
 <body>
+  {{ partial "top.html" . }}
   <main class="wrap">{{ block "main" . }}{{ end }}</main>
   <footer class="wrap foot">
-    {{- range .Translations }}<a href="{{ .RelPermalink }}" hreflang="{{ .Language.Lang }}">{{ i18n "switch" }}</a>{{ end }}
     <span>© {{ now.Year }} {{ site.Params.author }}</span>
+    <span>hugo · forgejo · cloudflare pages</span>
   </footer>
 </body>
 </html>
