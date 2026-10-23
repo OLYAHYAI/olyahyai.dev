@@ -24,3 +24,7 @@ other = "Stack"
 other = "Home"
 [minutes]
 other = "min read"
+[notfound_title]
+other = "Page not found"
+[notfound_text]
+other = "This page does not exist, or it has moved."

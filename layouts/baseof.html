@@ -3,7 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
+  <title>{{ if .IsHome }}{{ site.Title }}{{ else if eq .Kind "404" }}404 · {{ i18n "notfound_title" }} · {{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
+  {{- if eq .Kind "404" }}
+  <meta name="robots" content="noindex">
+  {{- end }}
   <meta name="description" content="{{ with .Params.summary }}{{ . }}{{ else }}{{ site.Language.Params.description }}{{ end }}">
   <meta name="theme-color" content="#0a0e27" media="(prefers-color-scheme: dark)">
   <meta name="theme-color" content="#f5f6fa" media="(prefers-color-scheme: light)">
