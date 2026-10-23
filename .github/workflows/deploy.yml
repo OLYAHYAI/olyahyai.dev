@@ -21,6 +21,8 @@ env:
   # sha256 of hugo_extended_${HUGO_VERSION}_linux-amd64.deb (from the release checksums.txt)
   HUGO_SHA256: "b7cd5087c39bf5584e40180bd04fab0c6fb19f2913cd63121da8663e112a08db"
   CF_PROJECT: "olyahyai-dev"
+  GITLEAKS_VERSION: "8.24.3"
+  GITLEAKS_SHA256: "9991e0b2903da4c8f6122b5c3186448b927a5da4deef1fe45271c3793f4ee29c"
 
 jobs:
   build:
@@ -31,10 +33,16 @@ jobs:
         with:
           fetch-depth: 0   # full history for the secret scan
 
-      - name: Secret scan (gitleaks)
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # Pinned binary instead of gitleaks-action: the action scans "<first>^..<last>",
+      # which fails on a repository's very first push (the root commit has no parent).
+      # Here the whole history is scanned on every run (small repo); findings are redacted.
+      - name: Secret scan (gitleaks, full history)
+        run: |
+          tgz="gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          curl -fsSLO "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/${tgz}"
+          echo "${GITLEAKS_SHA256}  ${tgz}" | sha256sum -c -
+          tar xzf "${tgz}" gitleaks
+          ./gitleaks git --redact --verbose --exit-code 1 .
 
       - name: Install Hugo (pinned + checksum)
         run: |
