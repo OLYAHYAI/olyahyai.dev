@@ -24,3 +24,7 @@ other = "Outils"
 other = "Accueil"
 [minutes]
 other = "min de lecture"
+[notfound_title]
+other = "Page introuvable"
+[notfound_text]
+other = "Cette page n'existe pas, ou elle a été déplacée."

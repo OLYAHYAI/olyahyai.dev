@@ -65,7 +65,7 @@ jobs:
 
       - name: Check output
         run: |
-          for f in public/index.html public/fr/index.html public/cv/index.html public/fr/cv/index.html public/cv/en.pdf public/cv/fr.pdf; do
+          for f in public/index.html public/fr/index.html public/cv/index.html public/fr/cv/index.html public/cv/en.pdf public/cv/fr.pdf public/404.html public/fr/404.html; do
             test -s "$f" || { echo "missing $f"; exit 1; }
           done
 
