@@ -8,3 +8,19 @@ other = "Réalisations"
 other = "Contact"
 [switch]
 other = "English version"
+[case_studies]
+other = "Études de cas"
+[case_studies_intro]
+other = "Des problèmes réels rencontrés en construisant un SOC/SOAR auto-hébergé, avec la cause racine et ce qui a changé."
+[other_work]
+other = "Autres réalisations"
+[read]
+other = "Lire"
+[back]
+other = "Toutes les études de cas"
+[stack]
+other = "Outils"
+[home]
+other = "Accueil"
+[minutes]
+other = "min de lecture"

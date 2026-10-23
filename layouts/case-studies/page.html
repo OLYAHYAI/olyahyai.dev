@@ -1,0 +1,16 @@
+{{ define "main" }}
+<nav class="crumbs"><a href="{{ "/" | relLangURL }}">{{ i18n "home" }}</a> / <a href="{{ .Parent.RelPermalink }}">{{ i18n "case_studies" }}</a></nav>
+<article class="case">
+  <header>
+    <h1>{{ .Title }}</h1>
+    <p class="lede">{{ .Summary }}</p>
+    <p class="meta">{{ .Date | time.Format ":date_long" }} · {{ .ReadingTime }} {{ i18n "minutes" }}</p>
+    {{- with .Params.stack }}<p class="stack"><span>{{ i18n "stack" }}</span> {{ delimit . " · " }}</p>{{ end }}
+  </header>
+  {{ .Content }}
+  <footer class="case-foot">
+    {{- with .PrevInSection }}<a href="{{ .RelPermalink }}">← {{ .Title }}</a>{{ end }}
+    {{- with .NextInSection }}<a href="{{ .RelPermalink }}">{{ .Title }} →</a>{{ end }}
+  </footer>
+</article>
+{{ end }}

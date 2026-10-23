@@ -8,3 +8,19 @@ other = "Selected work"
 other = "Contact"
 [switch]
 other = "Version française"
+[case_studies]
+other = "Case studies"
+[case_studies_intro]
+other = "Real problems from building a self-hosted SOC/SOAR, with the root cause and what changed."
+[other_work]
+other = "Other work"
+[read]
+other = "Read"
+[back]
+other = "All case studies"
+[stack]
+other = "Stack"
+[home]
+other = "Home"
+[minutes]
+other = "min read"

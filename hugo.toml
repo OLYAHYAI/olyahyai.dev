@@ -9,11 +9,19 @@ disableKinds = ["taxonomy", "term", "RSS"]
   [languages.en]
     languageName = "English"
     weight = 1
+    [languages.en.permalinks.page]
+      case-studies = "/case-studies/:slug/"
+    [languages.en.permalinks.section]
+      case-studies = "/case-studies/"
     [languages.en.params]
       description = "Systems, network & security engineer — self-hosted SOC/SOAR, detection engineering, homelab."
   [languages.fr]
     languageName = "Français"
     weight = 2
+    [languages.fr.permalinks.page]
+      case-studies = "/etudes-de-cas/:slug/"
+    [languages.fr.permalinks.section]
+      case-studies = "/etudes-de-cas/"
     [languages.fr.params]
       description = "Ingénieur systèmes, réseaux et sécurité — SOC/SOAR auto-hébergé, ingénierie de détection, homelab."
 
@@ -25,6 +33,10 @@ disableKinds = ["taxonomy", "term", "RSS"]
 
 [markup.goldmark.renderer]
   unsafe = false
+
+# Plain <pre><code>: no inline colour styles, readable in light and dark themes.
+[markup.highlight]
+  codeFences = false
 
 [minify]
   minifyOutput = true

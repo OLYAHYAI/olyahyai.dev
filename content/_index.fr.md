@@ -2,10 +2,8 @@
 title: "Omar Lyahyai"
 role: "Ingénieur systèmes, réseaux et sécurité · Master 2 Cyberdéfense"
 projects:
-  - name: "Mini-SOC / SOAR autonome"
-    when: "2026 – aujourd'hui"
-    text: "Wazuh, Suricata, Zeek et Velociraptor auto-hébergés sur un cluster Proxmox à 3 nœuds, avec automatisation n8n, blocage automatique d'IP sur pfSense et triage assisté par IA. Projet de fin d'études."
   - name: "PurpleOps"
+    url: "https://github.com/OLYAHYAI/PurpleOps"
     when: "2026"
     text: "Application Android native qui lance un chroot Kali et affiche un tableau de bord Wazuh en direct via Tailscale. Versions signées construites par GitHub Actions."
   - name: "Homelab"
@@ -15,4 +13,4 @@ projects:
     when: "2025 – 2026"
     text: "SaaS e-commerce pour artisans et commerçants marocains : Next.js, Strapi, PostgreSQL, CI/CD et Cloudflare Tunnels."
 ---
-J'exploite des infrastructures de production et je construis des outils de sécurité à côté. Les études de cas du projet SOC/SOAR arrivent bientôt ici.
+J'exploite des infrastructures de production et je construis des outils de sécurité à côté. Mon projet de fin d'études est un SOC/SOAR auto-hébergé ; les études de cas ci-dessous montrent comment il a été construit, ce qui a cassé, et comment chaque problème a été ramené à sa cause racine.

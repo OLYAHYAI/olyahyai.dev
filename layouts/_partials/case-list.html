@@ -1,0 +1,11 @@
+<ul class="cards">
+{{- range . }}
+  <li class="card">
+    <a href="{{ .RelPermalink }}">
+      <h3>{{ .Title }}</h3>
+      <p>{{ .Summary }}</p>
+      {{- with .Params.tags }}<p class="tags">{{ range . }}<span>{{ . }}</span>{{ end }}</p>{{ end }}
+    </a>
+  </li>
+{{- end }}
+</ul>

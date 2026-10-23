@@ -19,3 +19,28 @@ h2{font-size:.8rem;text-transform:uppercase;letter-spacing:.14em;color:var(--mut
 .when{color:var(--muted);font-size:.85rem;margin-left:.4rem}
 .foot{display:flex;justify-content:space-between;color:var(--muted);font-size:.85rem;margin-top:4rem;padding-bottom:2rem;border-top:1px solid var(--line);padding-top:1rem}
 @media (max-width:480px){.hero{flex-direction:column;align-items:flex-start}}
+/* --- case studies --- */
+.h2link{color:inherit}
+.crumbs{font-size:.85rem;color:var(--muted);margin-bottom:1.5rem}
+.lede{font-size:1.1rem;color:var(--muted);margin:.5rem 0 1rem}
+.meta{font-size:.85rem;color:var(--muted);margin:.25rem 0}
+.stack{font-size:.85rem;color:var(--muted)}
+.stack span{text-transform:uppercase;letter-spacing:.12em;font-size:.75rem;margin-right:.4rem}
+.cards{list-style:none;padding:0;margin:0;display:grid;gap:.9rem}
+.card a{display:block;padding:1rem 1.1rem;border:1px solid var(--line);border-radius:10px;color:inherit;text-decoration:none;transition:border-color .15s}
+.card a:hover{border-color:var(--accent)}
+.card h3{margin:0 0 .35rem;font-size:1.05rem;color:var(--accent)}
+.card p{margin:0;color:var(--muted);font-size:.95rem}
+.tags{margin-top:.6rem!important;display:flex;flex-wrap:wrap;gap:.35rem}
+.tags span{font-size:.75rem;border:1px solid var(--line);border-radius:999px;padding:.05rem .55rem}
+.case h2{font-size:1.25rem;text-transform:none;letter-spacing:0;color:var(--fg);border:0;margin:2.2rem 0 .6rem}
+.case h3{font-size:1.05rem;margin:1.6rem 0 .4rem}
+.case p,.case li{line-height:1.7}
+.case code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;background:color-mix(in srgb,var(--line) 55%,transparent);padding:.1em .35em;border-radius:4px}
+.case pre{background:color-mix(in srgb,var(--line) 45%,transparent);border:1px solid var(--line);border-radius:8px;padding:.9rem 1rem;overflow-x:auto;font-size:.85rem;line-height:1.5}
+.case pre code{background:none;padding:0}
+.case table{border-collapse:collapse;width:100%;font-size:.9rem;display:block;overflow-x:auto}
+.case th,.case td{border-bottom:1px solid var(--line);padding:.45rem .6rem;text-align:left;vertical-align:top}
+.case th{font-weight:600}
+.case blockquote{margin:1.2rem 0;padding:.2rem 1rem;border-left:3px solid var(--accent);color:var(--muted)}
+.case-foot{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.9rem}
