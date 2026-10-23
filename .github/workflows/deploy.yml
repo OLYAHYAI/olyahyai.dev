@@ -44,6 +44,11 @@ jobs:
           tar xzf "${tgz}" gitleaks
           ./gitleaks git --redact --verbose --exit-code 1 .
 
+      - name: Leak check (private IPs, tailnet names, MACs, guest IDs, private denylist)
+        env:
+          SENSITIVE_DENYLIST: ${{ secrets.SENSITIVE_DENYLIST }}
+        run: scripts/check-sensitive.sh
+
       - name: Install Hugo (pinned + checksum)
         run: |
           deb="hugo_extended_${HUGO_VERSION}_linux-amd64.deb"

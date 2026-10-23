@@ -13,11 +13,17 @@
   <a href="{{ site.Params.github }}" rel="me">GitHub</a>
   <a href="{{ site.Params.linkedin }}" rel="me">LinkedIn</a>
 </nav>
+{{- with site.GetPage "/case-studies" }}
 <section>
-  <h2>{{ i18n "projects" }}</h2>
+  <h2><a class="h2link" href="{{ .RelPermalink }}">{{ i18n "case_studies" }}</a></h2>
+  {{ partial "case-list.html" .Pages.ByWeight }}
+</section>
+{{- end }}
+<section>
+  <h2>{{ i18n "other_work" }}</h2>
   <ul class="projects">
   {{- range .Params.projects }}
-    <li><strong>{{ .name }}</strong> <span class="when">{{ .when }}</span><br>{{ .text }}</li>
+    <li><strong>{{ if .url }}<a href="{{ .url }}">{{ .name }}</a>{{ else }}{{ .name }}{{ end }}</strong> <span class="when">{{ .when }}</span><br>{{ .text }}</li>
   {{- end }}
   </ul>
 </section>
