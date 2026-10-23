@@ -74,6 +74,23 @@ jobs:
           name: site
           path: public
 
+      # Creates the Pages project on the first run (idempotent: "already exists" is accepted),
+      # so nothing has to be clicked in the Cloudflare dashboard besides the API token.
+      - name: Ensure Cloudflare Pages project exists
+        env:
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          api="https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT}/pages/projects"
+          code=$(curl -sS -o get.json -w '%{http_code}' -H "Authorization: Bearer ${CF_TOKEN}" "${api}/${CF_PROJECT}")
+          if [ "$code" = "200" ]; then echo "project ${CF_PROJECT} exists"; exit 0; fi
+          code=$(curl -sS -o create.json -w '%{http_code}' -X POST -H "Authorization: Bearer ${CF_TOKEN}" \
+            -H 'Content-Type: application/json' \
+            -d "{\"name\":\"${CF_PROJECT}\",\"production_branch\":\"main\"}" "${api}")
+          echo "create -> HTTP ${code}"
+          python3 -c "import json;d=json.load(open('create.json'));print('success:',d.get('success'),'errors:',d.get('errors'))"
+          [ "$code" = "200" ]
+
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
