@@ -73,7 +73,7 @@
   "current": false,
   "group": "Key figures",
   "details": [
-   "20 / 20 test cases passing"
+   "30 / 30 test cases passing"
   ],
   "order": 111,
   "subtitle": "",
@@ -93,7 +93,7 @@
   "current": false,
   "group": "Key figures",
   "details": [
-   "Velociraptor on 9 endpoints"
+   "Velociraptor on 10 endpoints"
   ],
   "order": 112,
   "subtitle": "",
@@ -646,10 +646,10 @@
   "details": [
    "**SIEM:** deployed Wazuh (manager and indexer) to centralize pfSense firewall logs, Suricata IDS (EVE JSON), CrowdSec, DHCP and Unbound DNS, plus about a dozen Linux, Windows and Android agents. Encrypted the syslog transport with **TLS** (stunnel, internal PKI).",
    "**Detection engineering:** wrote custom decoders and rules mapped to **MITRE ATT&CK**, added GeoIP enrichment and built a threat-geolocation dashboard. Fixed silent ingestion failures at the root cause (decoder anchoring, chrooted daemons, a syslog boot race after a pfSense upgrade).",
-   "**Detection-as-code:** put the ruleset under Git with a written change procedure and a **non-regression suite that replays real logs** (20/20 passing). Added a pipeline health watchdog that alerts on drops in volume, parsing or freshness.",
+   "**Detection-as-code:** put the ruleset under Git with a written change procedure and a **non-regression suite that replays real logs** (30/30 passing). Added a pipeline health watchdog that alerts on drops in volume, parsing or freshness.",
    "**SOAR (n8n):** Wazuh webhooks feed AbuseIPDB enrichment, multi-rule correlation, deduplication, enriched Telegram alerts and a daily digest. Designed and validated **automatic IP blocking** on pfSense through Wazuh Active Response (least-privilege SSH account, pf table).",
    "**AI-assisted triage:** each critical alert opens a ticket that an LLM agent triages through **home-built read-only MCP servers** (Wazuh, Proxmox). The agents are controlled from a Matrix/Element X SOC room. Agent privileges were hardened after an observed tool-bypass attempt.",
-   "**DFIR:** deployed Velociraptor on 9 endpoints and forwarded its audit log to Wazuh, with rules for remote execution and agent tampering.",
+   "**DFIR:** deployed Velociraptor on 10 endpoints and forwarded its audit log to Wazuh, with rules for remote execution and agent tampering.",
    "**Purple-team lab** on an isolated network: Windows AD domain controller (Kerberos and DCSync auditing, Sysmon-modular, Atomic Red Team), DVWA and Metasploitable 3."
   ],
   "order": 1100,
@@ -822,7 +822,7 @@
   "current": false,
   "group": "Chiffres clés",
   "details": [
-   "20 / 20 cas validés"
+   "30 / 30 cas validés"
   ],
   "order": 111,
   "subtitle": "",
@@ -842,7 +842,7 @@
   "current": false,
   "group": "Chiffres clés",
   "details": [
-   "Velociraptor sur 9 machines"
+   "Velociraptor sur 10 machines"
   ],
   "order": 112,
   "subtitle": "",
@@ -1395,10 +1395,10 @@
   "details": [
    "**SIEM :** déploiement de Wazuh (manager et indexer) pour centraliser les logs du pare-feu pfSense, l'IDS Suricata (EVE JSON), CrowdSec, DHCP et le DNS Unbound, ainsi qu'une douzaine d'agents Linux, Windows et Android. Transport syslog chiffré en **TLS** (stunnel, PKI interne).",
    "**Ingénierie de détection :** décodeurs et règles custom mappés sur **MITRE ATT&CK**, enrichissement GeoIP et tableau de bord de géolocalisation des menaces. Pannes d'ingestion silencieuses corrigées à la racine (ancrage des décodeurs, démons chrootés, race au démarrage de syslog après une mise à jour pfSense).",
-   "**Detection-as-code :** ruleset versionné sous Git avec une procédure de changement écrite et une **suite de non-régression qui rejoue des logs réels** (20/20 validés). Sonde de santé du pipeline qui alerte sur les chutes de volume, de parsing ou de fraîcheur.",
+   "**Detection-as-code :** ruleset versionné sous Git avec une procédure de changement écrite et une **suite de non-régression qui rejoue des logs réels** (30/30 validés). Sonde de santé du pipeline qui alerte sur les chutes de volume, de parsing ou de fraîcheur.",
    "**SOAR (n8n) :** les webhooks Wazuh alimentent l'enrichissement AbuseIPDB, la corrélation multi-règles, la déduplication, des alertes Telegram enrichies et un digest quotidien. Conception et validation du **blocage automatique d'IP** sur pfSense via l'Active Response Wazuh (compte SSH à moindre privilège, table pf).",
    "**Triage assisté par IA :** chaque alerte critique ouvre un ticket qu'un agent LLM trie via des **serveurs MCP maison en lecture seule** (Wazuh, Proxmox). Les agents se pilotent depuis un salon SOC Matrix/Element X. Leurs droits ont été durcis après une tentative de contournement d'outil observée.",
-   "**DFIR :** Velociraptor déployé sur 9 machines, son journal d'audit remonté dans Wazuh avec des règles d'exécution à distance et d'altération de l'agent.",
+   "**DFIR :** Velociraptor déployé sur 10 machines, son journal d'audit remonté dans Wazuh avec des règles d'exécution à distance et d'altération de l'agent.",
    "**Lab purple team** sur réseau isolé : contrôleur de domaine Windows AD (audit Kerberos et DCSync, Sysmon-modular, Atomic Red Team), DVWA et Metasploitable 3."
   ],
   "order": 1100,
