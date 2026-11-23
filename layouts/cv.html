@@ -1,7 +1,133 @@
-{{- /* Standalone page: the hand-written CV (assets/cv/cv.<lang>.html) is served as is.
-       No baseof on purpose: the CV carries its own print stylesheet for the PDF. */ -}}
-{{- with resources.Get (printf "cv/cv.%s.html" .Language.Lang) -}}
-{{ .Content | safeHTML }}
-{{- else -}}
-{{ errorf "missing assets/cv/cv.%s.html" $.Language.Lang }}
+{{- /* CV generated from data/cv.json (Notion "CV — Faits", exported by notion-sync).
+       Standalone page (no baseof): the CV carries its own print stylesheet for the PDF.
+       Layout = the hand-written CV of 20/10/2026, two A4 pages:
+         page 1: sidebar Contact, Accroche, Savoir-être, Langue | main Profil, Compétence, Expérience
+         page 2: sidebar Chiffre clé, Certification, Intérêt  | main Projet, Formation
+       A section with no visible fact is omitted. The CI fails if a PDF is not exactly 2 pages. */ -}}
+{{- $lang := .Language.Lang -}}
+{{- $facts := where (hugo.Data.cv | default slice) "lang" $lang -}}
+{{- if not $facts }}{{ errorf "data/cv.json: no CV fact for language %q" $lang }}{{ end -}}
+{{- $S := dict -}}
+{{- range slice "Contact" "Accroche" "Savoir-être" "Langue" "Profil" "Compétence" "Expérience" "Chiffre clé" "Certification" "Intérêt" "Projet" "Formation" -}}
+  {{- $S = merge $S (dict . (sort (where $facts "section" .) "order")) -}}
 {{- end -}}
+{{- $role := slice -}}{{- $contacts := slice -}}
+{{- range index $S "Contact" -}}
+  {{- if eq .key "role" }}{{ $role = .details }}{{ else }}{{ $contacts = $contacts | append . }}{{ end -}}
+{{- end -}}
+{{- $fr := eq $lang "fr" -}}
+<!DOCTYPE html>
+<html lang="{{ $lang }}">
+<head>
+<meta charset="UTF-8" />
+<title>CV - Omar LYAHYAI - {{ delimit (first 2 $role) " " }}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+{{ partial "cv-style.html" . }}
+</head>
+<body>
+<nav class="cv-bar"><a href="{{ if $fr }}/fr/{{ else }}/{{ end }}">← olyahyai.dev</a><a href="/cv/{{ $lang }}.pdf">{{ if $fr }}Télécharger le PDF{{ else }}Download PDF{{ end }}</a>{{ if $fr }}<a href="/cv/" hreflang="en">English version</a>{{ else }}<a href="/fr/cv/" hreflang="fr">Version française</a>{{ end }}</nav>
+
+{{- define "partials/cv-side-text.html" -}}
+{{- /* sidebar block: title + details; mode: text | pills | lines | pairs */ -}}
+{{- $f := .f -}}
+<div class="side-title"{{ if .first }} style="margin-top:0"{{ end }}>{{ .title }}</div>
+{{- if eq .mode "pills" }}
+<div class="side pills">{{ range $f.details }}<span>{{ . }}</span>{{ end }}</div>
+{{- else if eq .mode "lines" }}
+<div class="side">{{ range $i, $l := $f.details }}{{ if $i }}<br />{{ end }}{{ partial "cv-inline.html" (dict "text" $l "link" "") }}{{ end }}</div>
+{{- else }}
+<div class="side">{{ range $f.details }}{{ partial "cv-inline.html" (dict "text" . "link" $f.link) }} {{ end }}</div>
+{{- end }}
+{{- end -}}
+
+{{- define "partials/cv-pairs.html" -}}
+<div class="side-title"{{ if .first }} style="margin-top:0"{{ end }}>{{ .title }}</div>
+<div class="side">
+{{- range .rows }}
+<span class="c-label">{{ .title }}</span><span class="c-value">{{ partial "cv-inline.html" (dict "text" (delimit .details " ") "link" .link) }}</span>
+{{- end }}
+</div>
+{{- end -}}
+
+{{- define "partials/cv-items.html" -}}
+{{- $edu := .edu -}}
+{{- range .rows }}
+<div class="item">
+<div class="item-head"><div class="item-title">{{ .title }}</div><div class="item-meta">{{ with .place }}{{ . }} | {{ end }}{{ .period }}</div></div>
+{{- with .subtitle }}
+<div class="item-sub"{{ if $edu }} style="color:var(--muted);font-weight:500"{{ end }}>{{ . }}</div>
+{{- end }}
+{{- $link := .link -}}
+{{- with .details }}
+<ul>{{ range . }}<li>{{ partial "cv-inline.html" (dict "text" . "link" $link) }}</li>{{ end }}</ul>
+{{- end }}
+{{- with .stack }}
+<div class="stack">{{ . }}</div>
+{{- end }}
+</div>
+{{- end }}
+{{- end -}}
+
+<!-- ============ PAGE 1 ============ -->
+<div class="page">
+<aside class="left">
+<div class="photo"><img src="/cv/photo.jpg" alt="Omar LYAHYAI" /></div>
+<div class="name">Omar<br />Lyahyai</div>
+<div class="role">{{ delimit $role "<br />" | safeHTML }}</div>
+{{ with $contacts }}{{ partial "cv-pairs.html" (dict "title" (index . 0).group "rows" .) }}{{ end }}
+{{ range index $S "Accroche" }}{{ partial "cv-side-text.html" (dict "f" . "title" .title "mode" "text") }}{{ end }}
+{{ range index $S "Savoir-être" }}{{ partial "cv-side-text.html" (dict "f" . "title" .title "mode" "pills") }}{{ end }}
+{{ range index $S "Langue" }}{{ partial "cv-side-text.html" (dict "f" . "title" .title "mode" "lines") }}{{ end }}
+</aside>
+
+<main class="right">
+{{- range index $S "Profil" }}
+<section class="section">
+<h2>{{ .title }}</h2>
+{{ range .details }}<p>{{ partial "cv-inline.html" (dict "text" . "link" "") }}</p>{{ end }}
+</section>
+{{- end }}
+{{- with index $S "Compétence" }}
+<section class="section">
+<h2>{{ (index . 0).group }}</h2>
+<div class="skills">
+{{- range . }}
+<div><h3>{{ .title }}</h3><div class="pills">{{ range .details }}<span>{{ . }}</span>{{ end }}</div></div>
+{{- end }}
+</div>
+</section>
+{{- end }}
+{{- with index $S "Expérience" }}
+<section class="section">
+<h2>{{ (index . 0).group }}</h2>
+{{ partial "cv-items.html" (dict "rows" . "edu" false) }}
+</section>
+{{- end }}
+</main>
+</div>
+
+<!-- ============ PAGE 2 ============ -->
+<div class="page">
+<aside class="left">
+{{ with index $S "Chiffre clé" }}{{ partial "cv-pairs.html" (dict "title" (index . 0).group "rows" . "first" true) }}{{ end }}
+{{ range $i, $f := index $S "Certification" }}{{ partial "cv-side-text.html" (dict "f" $f "title" $f.title "mode" "lines" "first" (and (eq $i 0) (not (index $S "Chiffre clé")))) }}{{ end }}
+{{ range index $S "Intérêt" }}{{ partial "cv-side-text.html" (dict "f" . "title" .title "mode" "pills") }}{{ end }}
+</aside>
+
+<main class="right">
+{{- with index $S "Projet" }}
+<section class="section">
+<h2>{{ (index . 0).group }}</h2>
+{{ partial "cv-items.html" (dict "rows" . "edu" false) }}
+</section>
+{{- end }}
+{{- with index $S "Formation" }}
+<section class="section edu">
+<h2>{{ (index . 0).group }}</h2>
+{{ partial "cv-items.html" (dict "rows" . "edu" true) }}
+</section>
+{{- end }}
+</main>
+</div>
+</body>
+</html>

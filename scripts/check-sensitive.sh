@@ -10,9 +10,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-paths=(content layouts i18n hugo.toml assets/css)
-# The hand-written CV is checked too, but its embedded base64 photo was extracted already.
-[ -d assets/cv ] && paths+=(assets/cv)
+paths=(content layouts i18n hugo.toml assets/css data)
 
 patterns=(
   '(^|[^0-9.])10\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}([^0-9]|$)'

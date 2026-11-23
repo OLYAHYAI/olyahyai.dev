@@ -1,0 +1,74 @@
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  :root {
+    --ink: #111827; --ink-2: #374151; --muted: #6b7280; --line: #d1d5db;
+    --accent: #0284c7; --accent-2: #0ea5e9; --side: #f3f4f6;
+  }
+  html, body { margin: 0; padding: 0; background: #e5e7eb; }
+  body {
+    font-family: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+    color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .page {
+    width: 210mm; height: 297mm; margin: 10mm auto; background: #fff;
+    display: flex; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,.15);
+    page-break-after: always; break-after: page;
+  }
+  .page:last-child { page-break-after: auto; break-after: auto; }
+  .left { width: 62mm; flex: 0 0 62mm; background: var(--side); padding: 14mm 7mm 10mm 9mm; }
+  .right { flex: 1; padding: 13mm 12mm 10mm 10mm; }
+
+  .photo { width: 40mm; height: 40mm; border-radius: 50%; padding: 3px; margin: 0 auto 5mm;
+           background: linear-gradient(135deg, var(--accent-2), #22c55e, #6366f1); }
+  .photo img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; }
+  .name { text-align: center; font-size: 19px; font-weight: 700; letter-spacing: .14em;
+          text-transform: uppercase; line-height: 1.25; color: #1f2937; }
+  .role { text-align: center; font-size: 8.6px; font-weight: 600; letter-spacing: .13em;
+          text-transform: uppercase; color: var(--accent); margin: 3mm 0 2mm; line-height: 1.55; }
+
+  .side-title { font-size: 8.6px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+                color: #4b5563; border-top: 1px solid #9ca3af; padding-top: 2.4mm; margin: 6mm 0 2.4mm; }
+  .side { font-size: 8.9px; line-height: 1.55; color: var(--ink-2); }
+  .c-label { display: block; font-size: 7px; font-weight: 600; letter-spacing: .16em;
+             text-transform: uppercase; color: var(--muted); margin-top: 1.8mm; }
+  .c-value { display: block; font-size: 8.6px; color: var(--ink); word-break: break-word; }
+  a { color: var(--accent); text-decoration: none; }
+
+  .pills span { display: inline-block; font-size: 7.8px; line-height: 1.2; padding: 1.6px 6px;
+                border: 1px solid var(--line); border-radius: 999px; background: #fff;
+                margin: 0 2.5px 3px 0; color: var(--ink); }
+  .side .pills span { background: #fff; }
+
+  .section { margin-bottom: 5.4mm; }
+  h2 { font-size: 10px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
+       color: #374151; border-bottom: 1px solid var(--line); padding-bottom: 1.6mm; margin: 0 0 2.6mm; }
+  p { font-size: 9.5px; line-height: 1.6; margin: 0 0 1.8mm; color: var(--ink); }
+
+  .skills { display: grid; grid-template-columns: 1fr 1fr; gap: 2.4mm 6mm; }
+  .skills h3 { font-size: 8.8px; font-weight: 700; margin: 0 0 1.2mm; color: var(--ink); }
+
+  .item { margin-bottom: 3.6mm; break-inside: avoid; }
+  .item-head { display: flex; justify-content: space-between; align-items: baseline; gap: 4mm; }
+  .item-title { font-size: 9.8px; font-weight: 700; color: var(--ink); }
+  .item-meta { font-size: 8.2px; color: var(--muted); white-space: nowrap; text-align: right; }
+  .item-sub { font-size: 8.3px; color: var(--accent); font-weight: 600; margin: .4mm 0 1mm; }
+  ul { margin: 0; padding-left: 3.6mm; }
+  li { font-size: 9.1px; line-height: 1.5; color: var(--ink-2); margin-bottom: .55mm; }
+  li b { color: var(--ink); font-weight: 600; }
+  .stack { font-size: 8px; color: var(--muted); margin-top: .8mm; }
+
+  .edu .item-title { font-size: 9px; }
+
+  @media print {
+    html, body { background: #fff; }
+    .page { margin: 0; box-shadow: none; }
+  }
+  @media screen and (max-width: 820px) {
+    .page { width: 100%; height: auto; margin: 0; flex-direction: column; }
+    .left { width: 100%; flex: none; }
+    .skills { grid-template-columns: 1fr; }
+  }
+  .cv-bar { max-width: 210mm; margin: 6mm auto 0; display: flex; gap: 6mm; font-size: 13px; }
+  @media print { .cv-bar { display: none; } }
+</style>

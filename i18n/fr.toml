@@ -28,3 +28,9 @@ other = "min de lecture"
 other = "Page introuvable"
 [notfound_text]
 other = "Cette page n'existe pas, ou elle a été déplacée."
+[articles]
+other = "Articles"
+[articles_intro]
+other = "Notes et comptes rendus du lab."
+[projects_intro]
+other = "Projets : ce qui a été construit, et pourquoi."

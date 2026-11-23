@@ -21,9 +21,19 @@
   {{ partial "case-list.html" .Pages.ByWeight }}
 </section>
 {{- end }}
+{{- with site.GetPage "/articles" }}{{ with .Pages }}
+<section class="section">
+  <h2 class="section-title"><a href="{{ (site.GetPage "/articles").RelPermalink }}">{{ i18n "articles" }}</a></h2>
+  {{ partial "case-list.html" .ByWeight }}
+</section>
+{{- end }}{{ end }}
 <section class="section">
   <h2 class="section-title">{{ i18n "other_work" }}</h2>
   <ul class="projects">
+  {{- /* Projects published from Notion (section /projects) come first, then the hand-written list. */ -}}
+  {{- with site.GetPage "/projects" }}{{ range .Pages.ByWeight }}
+    <li><strong><a href="{{ .RelPermalink }}">{{ .Title }}</a></strong><span class="when">{{ with .Params.period }}{{ . }}{{ else }}{{ .Date.Year }}{{ end }}</span><br>{{ .Summary }}</li>
+  {{- end }}{{ end }}
   {{- range .Params.projects }}
     <li><strong>{{ if .url }}<a href="{{ .url }}">{{ .name }}</a>{{ else }}{{ .name }}{{ end }}</strong><span class="when">{{ .when }}</span><br>{{ .text }}</li>
   {{- end }}

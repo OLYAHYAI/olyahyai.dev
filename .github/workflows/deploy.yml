@@ -68,6 +68,11 @@ jobs:
           for f in public/index.html public/fr/index.html public/cv/index.html public/fr/cv/index.html public/cv/en.pdf public/cv/fr.pdf public/404.html public/fr/404.html; do
             test -s "$f" || { echo "missing $f"; exit 1; }
           done
+          # The CV must stay on exactly 2 A4 pages (generated from Notion facts, no human review).
+          for f in public/cv/en.pdf public/cv/fr.pdf; do
+            n=$(python3 -c "import re,sys;print(len(re.findall(rb'/Type\s*/Page(?!s)',open(sys.argv[1],'rb').read())))" "$f")
+            echo "$f: $n page(s)"; [ "$n" = "2" ] || { echo "::error::$f has $n pages (expected 2)"; exit 1; }
+          done
 
       - uses: actions/upload-artifact@v4
         with:

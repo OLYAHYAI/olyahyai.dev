@@ -1,0 +1,18 @@
+{{- /* Single publication (case study, article or project). Context: the page. */ -}}
+{{- $key := replace .Section "-" "_" -}}
+<div class="narrow">
+<nav class="crumbs"><a href="{{ "/" | relLangURL }}">~</a> / <a href="{{ .Parent.RelPermalink }}">{{ i18n $key | default .Parent.Title }}</a></nav>
+<article class="case">
+  <header>
+    <h1 class="page-title">{{ .Title }}</h1>
+    <p class="lede">{{ .Summary }}</p>
+    <p class="meta">{{ .Date | time.Format ":date_long" }} · {{ .ReadingTime }} {{ i18n "minutes" }}</p>
+    {{- with .Params.stack }}<p class="tags">{{ range . }}<span>{{ . }}</span>{{ end }}</p>{{ end }}
+  </header>
+  {{ .Content }}
+  <footer class="case-foot">
+    {{- with .PrevInSection }}<a href="{{ .RelPermalink }}">← {{ .Title }}</a>{{ end }}
+    {{- with .NextInSection }}<a href="{{ .RelPermalink }}">{{ .Title }} →</a>{{ end }}
+  </footer>
+</article>
+</div>

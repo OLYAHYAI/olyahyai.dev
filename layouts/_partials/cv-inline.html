@@ -1,0 +1,11 @@
+{{- /* Inline text of a CV fact: HTML-escaped, **bold** -> <b>, optional link.
+       Context: dict "text" <string> "link" <url or ""> */ -}}
+{{- $s := .text | htmlEscape -}}
+{{- $s = replaceRE `\*\*(.+?)\*\*` "<b>$1</b>" $s -}}
+{{- with .link -}}
+  {{- $bare := strings.TrimPrefix "https://" . | strings.TrimPrefix "http://" | strings.TrimPrefix "www." | strings.TrimSuffix "/" -}}
+  {{- if strings.Contains $s $bare -}}
+    {{- $s = replace $s $bare (printf `<a href="%s">%s</a>` (. | htmlEscape) $bare) -}}
+  {{- end -}}
+{{- end -}}
+{{- $s | safeHTML -}}

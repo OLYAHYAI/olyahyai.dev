@@ -28,3 +28,9 @@ other = "min read"
 other = "Page not found"
 [notfound_text]
 other = "This page does not exist, or it has moved."
+[articles]
+other = "Articles"
+[articles_intro]
+other = "Notes and write-ups from the lab."
+[projects_intro]
+other = "Projects, with what was built and why."

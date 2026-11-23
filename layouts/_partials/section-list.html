@@ -1,0 +1,6 @@
+{{- /* List page of a publication section. Context: the section page. i18n keys: <key> and <key>_intro */ -}}
+{{- $key := replace .Section "-" "_" -}}
+<nav class="crumbs"><a href="{{ "/" | relLangURL }}">~</a> / {{ i18n $key | default .Title }}</nav>
+<h1 class="page-title">{{ .Title }}</h1>
+{{- with i18n (printf "%s_intro" $key) }}<p class="lede">{{ . }}</p>{{ end }}
+{{ partial "case-list.html" .Pages.ByWeight }}

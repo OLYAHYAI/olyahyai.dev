@@ -22,15 +22,15 @@ Nothing is ever pushed straight to `main`: changes go through a pull request on 
 
 ```
 hugo.toml              languages (en default at /, fr at /fr/), params
-content/               home page text and project list (front matter), CV page stubs
-layouts/               baseof + home (no theme), cv.html serves assets/cv/cv.<lang>.html as is
-assets/cv/             the résumé, one self-contained HTML per language (A4 print CSS)
+content/               home page text and project list (front matter), CV page stubs;
+                       case-studies/, articles/, projects/ are generated from Notion (see below)
+data/cv.json           CV facts (Notion « CV — Faits »), generated — do not edit by hand
+layouts/               baseof + home (no theme); cv.html renders data/cv.json with the A4 print CSS
 assets/css/main.css    the only stylesheet of the site (light/dark)
 static/cv/photo.jpg    profile photo shared by the CV and the home page
 static/_headers        Cloudflare Pages security headers (CSP, HSTS, ...)
 scripts/build-pdf.sh   prints /cv/ and /fr/cv/ to public/cv/{en,fr}.pdf
-tools/import-cv.py     P0 only: imports the hand-written CV (will be replaced by data/cv.yaml in P3)
-.github/workflows/     gitleaks (pinned binary, full history) → Hugo (pinned, checksum) → PDFs → Cloudflare Pages
+.github/workflows/     gitleaks (pinned binary, full history) → Hugo (pinned, checksum) → PDFs (must be 2 pages) → Cloudflare Pages
                        (the Pages project is created on the first run if it does not exist)
 ```
 
@@ -41,15 +41,13 @@ hugo server                 # http://localhost:1313
 hugo --gc --minify && scripts/build-pdf.sh   # needs Chrome/Chromium
 ```
 
-## Updating the résumé (until P3)
+## Content pipeline (no manual step)
 
-Edit the source HTML in `HomeLab/CV-2026-10/`, then:
-
-```sh
-python3 tools/import-cv.py "<path>/HomeLab/CV-2026-10"
-```
-
-The script stops if an expected snippet is missing, so a change in the source is never silently dropped.
+Notion (« Portfolio — Espace Scribe ») → notion-sync → Forgejo `content` (PR `sync/notion`)
+→ publisher-gate (leak scan, locked CV sections, numbers grounded in sources, site build on a
+`auto/*` preview branch) → merge + fast-forward of `main` here → Cloudflare Pages.
+`data/cv.json`, `content/case-studies|articles|projects/*.md` and `static/images/` are written
+by the gate; hand-written files (layouts, `_index` pages, home text) are never touched.
 
 ## Secrets
 
